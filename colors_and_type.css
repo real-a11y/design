@@ -1,0 +1,216 @@
+/* real a11y — Design Tokens
+ * ------------------------------------------------
+ * Ground-truthed from the a11y-agency Next.js repo:
+ *   - app/globals.css (CSS custom props, HSL)
+ *   - tailwind.config.ts (primary scale, fonts)
+ *   - app/[locale]/layout.tsx (DM Sans + DM Serif Display)
+ *
+ * Our CSS vars are kept in both HSL (matching the repo) and hex
+ * (for easy use outside Tailwind).
+ */
+
+@import url("./fonts/fonts.css");
+
+:root {
+  /* ---------------- HSL tokens (mirrors globals.css) ---------------- */
+  --color-bg: 0 0% 100%; /* #ffffff */
+  --color-bg-subtle: 210 20% 98%; /* #f9fafb */
+  --color-surface: 0 0% 100%; /* #ffffff */
+  --color-border: 220 13% 91%; /* #e5e7eb */
+  --color-text-primary: 222 47% 11%; /* #0f172a */
+  --color-text-secondary: 215 20% 40%; /* #52637a approx */
+  --color-text-muted: 215 16% 45%; /* #64748b */
+  --color-text-inverse: 0 0% 100%; /* #ffffff */
+
+  /* ---------------- Hex aliases ---------------- */
+  --bg-page: hsl(var(--color-bg));
+  --bg-subtle: hsl(var(--color-bg-subtle));
+  --bg-surface: hsl(var(--color-surface));
+  --border-default: hsl(var(--color-border));
+  --fg-heading: hsl(var(--color-text-primary));
+  --fg-body: hsl(var(--color-text-secondary));
+  --fg-muted: hsl(var(--color-text-muted));
+  --fg-on-accent: hsl(var(--color-text-inverse));
+
+  /* Brand — royal blue scale (matches tailwind primary.*) */
+  --primary-50: hsl(221 100% 97%);
+  --primary-100: hsl(221 100% 94%);
+  --primary-200: hsl(221 94% 87%);
+  --primary-300: hsl(221 90% 78%);
+  --primary-400: hsl(221 86% 68%);
+  --primary-500: hsl(221 83% 58%);
+  --primary-600: hsl(221 83% 53%); /* #2463eb — PRIMARY */
+  --primary-700: hsl(224 76% 45%); /* hover */
+  --primary-800: hsl(224 76% 36%);
+  --primary-900: hsl(224 76% 25%);
+
+  --accent: var(--primary-600);
+  --accent-hover: var(--primary-700);
+  --accent-active: var(--primary-800);
+  --accent-soft: var(--primary-50);
+
+  /* Theme-aware accent — use for links / emphasized text.
+     Resolves to primary-700 on light, primary-300 on dark, so AA holds either way. */
+  --color-accent: hsl(224 76% 45%);
+  --color-accent-hover: hsl(224 76% 36%);
+
+  /* Semantic utility */
+  --danger: #ef4444; /* -A11y red from logo-kg.svg */
+  --success: #10a37f;
+
+  --border-hairline: hsl(var(--color-border));
+  --border-strong: hsl(220 13% 82%);
+
+  --ring-focus: var(--primary-600);
+
+  /* ---------------- Type: families (repo uses DM Sans + DM Serif Display) ---------------- */
+  --font-display: "DM Serif Display", ui-serif, Georgia, "Times New Roman", serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---------------- Type: scale (matches Tailwind usage in app code) ---------------- */
+  /* Display headings render with font-normal (400) — DM Serif Display only ships 400. */
+  --text-display-1: clamp(2.25rem, 1.6rem + 3vw, 3.75rem); /* ~36–60px · text-4xl→6xl */
+  --text-display-2: clamp(1.875rem, 1.5rem + 1.4vw, 2.25rem); /* ~30–36px · text-3xl→4xl */
+  --text-title-lg: 1.5rem; /* 24px · text-2xl — card/section */
+  --text-title: 1.25rem; /* 20px · text-xl — feature card h3 */
+  --text-body-lg: 1.125rem; /* 18px · text-lg — hero lede */
+  --text-body: 1rem; /* 16px */
+  --text-small: 0.875rem; /* 14px */
+  --text-xs: 0.75rem; /* 12px · eyebrow */
+
+  --leading-display: 1.1;
+  --leading-tight: 1.25;
+  --leading-body: 1.6;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --tracking-widest: 0.1em;
+  --tracking-wide: 0.025em;
+
+  /* ---------------- Spacing (Tailwind scale) ---------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-28: 112px;
+  --space-32: 128px;
+
+  --section-y: clamp(64px, 10vw, 112px);
+  --container: 64rem; /* max-w-5xl = 1024px */
+  --container-narrow: 48rem; /* max-w-3xl = 768px */
+
+  /* ---------------- Radius ---------------- */
+  --radius-sm: 4px;
+  --radius-md: 6px; /* rounded-md */
+  --radius-lg: 8px; /* rounded-lg — buttons */
+  --radius-xl: 12px;
+  --radius-2xl: 16px; /* rounded-2xl — cards */
+  --radius-full: 999px;
+
+  /* ---------------- Shadow ---------------- */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-lift: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --shadow-focus: 0 0 0 2px hsl(var(--color-bg)), 0 0 0 4px var(--primary-600);
+
+  /* ---------------- Motion ---------------- */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --dur-quick: 150ms;
+  --dur-base: 220ms;
+}
+
+/* ---------------- Dark theme (mirrors .dark{} in globals.css) ---------------- */
+:root.dark,
+:root[data-theme="dark"] {
+  --color-bg: 222 47% 8%;
+  --color-bg-subtle: 222 47% 11%;
+  --color-surface: 222 47% 12%;
+  --color-border: 222 47% 20%;
+  --color-text-primary: 210 40% 95%;
+  --color-text-secondary: 215 20% 65%;
+  --color-text-muted: 215 16% 65%;
+  --color-text-inverse: 222 47% 11%;
+  --color-accent: hsl(221 90% 78%);
+  --color-accent-hover: hsl(221 96% 87%);
+}
+
+/* ============================================================
+ * Recipe classes — use these or mirror them in Tailwind.
+ * ============================================================ */
+
+.ra-display-1 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular); /* DM Serif Display is 400-only */
+  font-size: var(--text-display-1);
+  line-height: var(--leading-display);
+  color: var(--fg-heading);
+  letter-spacing: -0.005em;
+}
+.ra-display-2 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-display-2);
+  line-height: var(--leading-tight);
+  color: var(--fg-heading);
+}
+.ra-title {
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-title);
+  line-height: 1.3;
+  color: var(--fg-heading);
+}
+.ra-body {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--fg-body);
+  text-wrap: pretty;
+}
+.ra-small {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  line-height: 1.55;
+  color: var(--fg-body);
+}
+.ra-eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-xs);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.ra-link {
+  color: var(--color-accent);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-small);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: color var(--dur-quick) var(--ease-out);
+}
+.ra-link:hover {
+  color: var(--color-accent-hover);
+}
+
+:focus-visible {
+  outline: 2px solid hsl(221 83% 53%);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

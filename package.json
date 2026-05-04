@@ -1,0 +1,69 @@
+{
+  "name": "@real-a11y-dev/design",
+  "version": "0.1.0",
+  "description": "Real accessibility, systematised. The design language behind real a11y — tokens, type, and color as a CSS-first package.",
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "css-variables",
+    "tailwind",
+    "accessibility",
+    "a11y",
+    "real-a11y",
+    "ui-kit"
+  ],
+  "license": "MIT",
+  "author": "real a11y",
+  "homepage": "https://github.com/real-a11y-dev/design#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/real-a11y-dev/design.git"
+  },
+  "bugs": {
+    "url": "https://github.com/real-a11y-dev/design/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "browser-sync start --server --files \"**/*.css\" \"**/*.html\" --no-notify --ignore \"node_modules/**\" \"debug/**\"",
+    "lint": "stylelint \"**/*.css\"",
+    "lint:fix": "stylelint \"**/*.css\" --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "pkg:check": "publint",
+    "prepublishOnly": "npm run lint && npm run pkg:check"
+  },
+  "style": "./tokens.css",
+  "exports": {
+    ".": {
+      "style": "./tokens.css",
+      "default": "./tokens.css"
+    },
+    "./tokens.css": "./tokens.css",
+    "./recipes.css": "./colors_and_type.css",
+    "./fonts.css": "./fonts/fonts.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "tokens.css",
+    "colors_and_type.css",
+    "fonts/",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "prettier": "^3.8.3",
+    "publint": "^0.3.18",
+    "stylelint": "^17.10.0",
+    "stylelint-config-standard": "^40.0.0"
+  }
+}

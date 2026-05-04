@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="_preview-base.css" />
+    <style>
+      .steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+      .step {
+        border-top: 1px solid var(--border-default);
+        padding-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .n {
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--fg-muted);
+        letter-spacing: 0.1em;
+      }
+      .t {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 16px;
+        color: var(--fg-heading);
+      }
+      .d {
+        font-family: var(--font-body);
+        font-size: 13.5px;
+        color: var(--fg-body);
+        margin: 0;
+        line-height: 1.55;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="ra-eyebrow">PROCESS · 01→04</div>
+      <ol class="steps">
+        <li class="step">
+          <span class="n">01</span>
+          <div class="t">Discover</div>
+          <p class="d">Frame the problem and gather the constraints that matter.</p>
+        </li>
+        <li class="step">
+          <span class="n">02</span>
+          <div class="t">Define</div>
+          <p class="d">Translate findings into a clear plan with measurable outcomes.</p>
+        </li>
+        <li class="step">
+          <span class="n">03</span>
+          <div class="t">Deliver</div>
+          <p class="d">Ship in tight loops with documented decisions along the way.</p>
+        </li>
+        <li class="step">
+          <span class="n">04</span>
+          <div class="t">Refine</div>
+          <p class="d">Validate with real users and iterate on what's working.</p>
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="_preview-base.css" />
+    <style>
+      .btn-p {
+        appearance: none;
+        border: 0;
+        background: var(--primary-600);
+        color: #fff;
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 16px;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: background var(--dur-quick) var(--ease-out);
+      }
+      .btn-p.hov {
+        background: var(--primary-700);
+      }
+      .btn-p.foc {
+        outline: 2px solid var(--primary-600);
+        outline-offset: 2px;
+      }
+      .btn-p[disabled] {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+      .ar {
+        display: inline-block;
+      }
+      .lnk {
+        color: var(--primary-600);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        gap: 6px;
+      }
+      .lnk:hover {
+        color: var(--primary-700);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="ra-eyebrow">BUTTON · PRIMARY + INLINE LINK</div>
+      <div class="row" style="gap: 14px; align-items: center">
+        <button class="btn-p">Get started <span class="ar">→</span></button>
+        <button class="btn-p hov">Get started <span class="ar">→</span></button>
+        <button class="btn-p foc">Get started <span class="ar">→</span></button>
+        <button class="btn-p" disabled>Get started <span class="ar">→</span></button>
+        <a href="#" class="lnk">View on npm <span class="ar">→</span></a>
+      </div>
+      <div class="col" style="gap: 4px">
+        <span class="mono">rest · hover (p-700) · focus-visible · disabled · text-link</span>
+        <span class="label" style="font-size: 10px"
+          >px-6 py-3 · rounded-lg · font-medium · ArrowRight 16px</span
+        >
+      </div>
+    </div>
+  </body>
+</html>

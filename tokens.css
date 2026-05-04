@@ -1,0 +1,170 @@
+/* ============================================================
+   real a11y — design tokens
+   Mirrors src/app/globals.css + tailwind config from the repo.
+   All colors declared as HSL component triplets (no hsl() wrap)
+   so they can be composed with alpha in Tailwind: hsl(var(--x) / .5)
+   ============================================================ */
+
+:root {
+  /* ---------- Type families ----------
+     Repo loads these via next/font in app/[locale]/layout.tsx and exposes them
+     as --font-dm-sans / --font-dm-serif. Tailwind maps them:
+       font-sans     → var(--font-dm-sans)    → DM Sans
+       font-display  → var(--font-dm-serif)   → DM Serif Display
+     We alias both names so downstream CSS can use whichever it likes. */
+  --font-dm-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-dm-serif: "DM Serif Display", ui-serif, Georgia, "Times New Roman", serif;
+
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-dm-serif);
+  --font-serif: var(--font-dm-serif);
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Wordmark uses Inter deliberately — the serif is editorial voice only */
+  --font-wordmark: "Inter", system-ui, Arial, sans-serif;
+
+  /* ---------- Brand: Primary (blue) ---------- */
+  /* Tailwind primary-* scale; primary-600 is the canonical accent */
+  --primary-50: 221 100% 97%;
+  --primary-100: 221 100% 94%;
+  --primary-200: 221 96% 87%;
+  --primary-300: 221 90% 78%;
+  --primary-400: 221 85% 68%;
+  --primary-500: 221 83% 58%;
+  --primary-600: 221 83% 53%; /* PRIMARY — CTAs, focus ring */
+  --primary-700: 224 76% 45%; /* hover */
+  --primary-800: 224 76% 36%; /* active */
+  --primary-900: 224 64% 28%;
+
+  /* ---------- Theme-aware accent (WCAG AA on bg) ----------
+     Use these for text/links instead of --primary-600 directly.
+     Light-mode default lands at primary-700 (≥4.5:1 on white).
+     Dark mode lifts to primary-300 (≥4.5:1 on bg). */
+  --color-accent: 224 76% 45%;
+  --color-accent-hover: 224 76% 36%;
+
+  /* ---------- Semantic surface + text (light) ---------- */
+  /* NB: Repo declares these on :root in app/globals.css. Names use
+     the --color-* prefix so Tailwind's `bg-bg` / `text-text-primary` utilities
+     resolve. Do not rename without updating tailwind.config.ts. */
+  --color-bg: 0 0% 100%; /* page background */
+  --color-bg-subtle: 210 20% 98%; /* alternating section band */
+  --color-surface: 0 0% 100%; /* cards */
+  --color-border: 220 13% 91%; /* hairline */
+
+  --color-text-primary: 222 47% 11%; /* headings */
+  --color-text-secondary: 215 20% 40%; /* body copy */
+  --color-text-muted: 215 16% 45%; /* meta, eyebrows, captions */
+  --color-text-inverse: 0 0% 100%;
+
+  /* ---------- Status (sparingly; the brand leans on primary only) ---------- */
+  --color-danger: 0 72% 51%; /* used in −A11y motif */
+  --color-success: 142 71% 45%;
+  --color-warning: 38 92% 50%;
+
+  /* ---------- Radii (Tailwind scale) ---------- */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px; /* buttons, nav pills */
+  --radius-xl: 12px;
+  --radius-2xl: 16px; /* cards */
+  --radius-full: 9999px;
+
+  /* ---------- Shadows (flat; the brand is editorial, not lifted) ---------- */
+  --shadow-xs: 0 1px 2px rgb(15 23 41 / 0.04);
+  --shadow-sm: 0 1px 3px rgb(15 23 41 / 0.05), 0 1px 2px rgb(15 23 41 / 0.04);
+  --shadow-md: 0 4px 6px -1px rgb(15 23 41 / 0.07), 0 2px 4px -2px rgb(15 23 41 / 0.05);
+
+  /* ---------- Layout ---------- */
+  --container: 64rem; /* max-w-5xl */
+  --nav-height: 4rem; /* h-16 */
+  --section-y: 5rem; /* py-20 desktop — repo uses py-16 sm:py-20 */
+
+  /* ---------- Motion ---------- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 150ms;
+  --dur-normal: 200ms;
+  --dur-slow: 300ms;
+}
+
+/* ============================================================
+   Dark mode — triggered by .dark on <html> (next-themes class strategy)
+   ============================================================ */
+.dark {
+  --color-bg: 222 47% 8%;
+  --color-bg-subtle: 222 47% 11%;
+  --color-surface: 222 47% 12%;
+  --color-border: 222 47% 20%;
+
+  --color-text-primary: 210 40% 95%;
+  --color-text-secondary: 215 20% 65%;
+  --color-text-muted: 215 16% 65%;
+  --color-text-inverse: 222 47% 11%;
+  /* primary-* scale is intentionally NOT overridden — brand blue stays stable.
+     Accent flips to a lighter tint so links pass AA on the dark surface. */
+  --color-accent: 221 90% 78%;
+  --color-accent-hover: 221 96% 87%;
+}
+
+/* Also honors OS preference when no explicit .light class is set —
+   mirrors the @media (prefers-color-scheme: dark) rule in globals.css */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-bg: 222 47% 8%;
+    --color-bg-subtle: 222 47% 11%;
+    --color-surface: 222 47% 12%;
+    --color-border: 222 47% 20%;
+    --color-text-primary: 210 40% 95%;
+    --color-text-secondary: 215 20% 65%;
+    --color-text-muted: 215 16% 65%;
+    --color-text-inverse: 222 47% 11%;
+    --color-accent: 221 90% 78%;
+    --color-accent-hover: 221 96% 87%;
+  }
+}
+
+/* ============================================================
+   Global base (lifted from src/app/globals.css intent)
+   ============================================================ */
+html {
+  font-family: var(--font-sans);
+  color: hsl(var(--color-text-primary));
+  background: hsl(var(--color-bg));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.625;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: hsl(var(--color-text-primary));
+}
+
+/* ---------- Focus ring (accessibility-first; honors primary-600) ---------- */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary-600));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Motion respect ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

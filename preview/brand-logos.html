@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=700" />
+    <link rel="stylesheet" href="_preview-base.css" />
+    <style>
+      .mark-tile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border: 1px solid hsl(220 13% 91%);
+        border-radius: 12px;
+      }
+      .mark-tile svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div
+        style="
+          font-family: var(--font-sans);
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--text-muted);
+        "
+      >
+        LOGOS · WORDMARK + MARK
+      </div>
+      <div class="row" style="gap: 24px; padding: 8px 0; align-items: center; flex-wrap: wrap">
+        <div class="col" style="gap: 8px; align-items: center">
+          <div class="mark-tile" style="width: 96px; height: 96px">
+            <img src="../assets/favicon.svg" width="96" height="96" alt="" />
+          </div>
+          <span class="mono">logo-mark</span>
+          <span class="label" style="font-size: 10px">256×256</span>
+        </div>
+        <div class="col" style="gap: 8px; align-items: center">
+          <div class="mark-tile" style="width: 72px; height: 72px">
+            <img src="../assets/favicon.svg" width="72" height="72" alt="" />
+          </div>
+          <span class="mono">apple-touch</span>
+          <span class="label" style="font-size: 10px">180×180</span>
+        </div>
+        <div class="col" style="gap: 8px; align-items: center">
+          <div class="mark-tile" style="width: 40px; height: 40px">
+            <img src="../assets/favicon.svg" width="40" height="40" alt="" />
+          </div>
+          <span class="mono">favicon</span>
+          <span class="label" style="font-size: 10px">32×32</span>
+        </div>
+        <div class="col" style="gap: 8px; align-items: flex-start">
+          <div
+            style="
+              padding: 14px 20px;
+              background: #fff;
+              border: 1px solid hsl(220 13% 91%);
+              border-radius: 8px;
+              color: hsl(222 47% 11%);
+            "
+          >
+            <svg viewBox="0 0 180 32" width="140" height="26" fill="none">
+              <text
+                x="0"
+                y="22"
+                fill="currentColor"
+                font-family="Inter,Arial"
+                font-size="20"
+                font-weight="700"
+                letter-spacing="-0.5"
+              >
+                real a11y
+              </text>
+            </svg>
+          </div>
+          <span class="mono">wordmark (canonical)</span>
+          <span class="label" style="font-size: 10px">Inter 700 · currentColor</span>
+        </div>
+      </div>
+      <div class="mono">mark + favicons in assets/ · all SVG</div>
+    </div>
+  </body>
+</html>

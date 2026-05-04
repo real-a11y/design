@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="_preview-base.css" />
+    <style>
+      .svc {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-default);
+        border-radius: 16px;
+        padding: 24px;
+        transition: all var(--dur-base) var(--ease-out);
+      }
+      .svc:hover {
+        border-color: var(--primary-300);
+        box-shadow: var(--shadow-sm);
+      }
+      .eb {
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--fg-muted);
+        margin: 0 0 8px;
+      }
+      .t {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 20px;
+        color: var(--fg-heading);
+        margin: 0 0 12px;
+      }
+      .d {
+        font-family: var(--font-body);
+        font-size: 14px;
+        color: var(--fg-body);
+        line-height: 1.6;
+        margin: 0 0 20px;
+      }
+      .chk {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .chk li {
+        display: flex;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--fg-body);
+        line-height: 1.55;
+        align-items: flex-start;
+      }
+      .chk li svg {
+        color: var(--primary-600);
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+      .lnk {
+        color: var(--primary-600);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        gap: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <article class="svc">
+        <p class="eb">FEATURE</p>
+        <h3 class="t">Semantic Navigator</h3>
+        <p class="d">
+          Browse a page by its real heading, landmark, and form structure — the way assistive tech
+          sees it. Surface accessibility issues without running a single automated tool.
+        </p>
+        <p class="eb">WHAT'S INCLUDED</p>
+        <ul class="chk">
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" /></svg
+            ><span>Headings, landmarks, and forms — auto-extracted</span>
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" /></svg
+            ><span>Issue badges with severity, impact, and WCAG reference</span>
+          </li>
+          <li>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" /></svg
+            ><span>Keyboard-only operation with native focus order</span>
+          </li>
+        </ul>
+        <a href="#" class="lnk">Try the navigator <span>→</span></a>
+      </article>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="_preview-base.css" />
+    <style>
+      .faq {
+        border-top: 1px solid var(--border-default);
+        border-bottom: 1px solid var(--border-default);
+      }
+      .q {
+        padding: 20px 4px;
+        border-bottom: 1px solid var(--border-default);
+      }
+      .q:last-child {
+        border-bottom: 0;
+      }
+      .q summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        cursor: pointer;
+        font-family: var(--font-body);
+        font-weight: 600;
+        color: var(--fg-heading);
+        font-size: 16px;
+      }
+      .q summary::-webkit-details-marker {
+        display: none;
+      }
+      .q summary svg {
+        color: var(--fg-muted);
+        transition: transform var(--dur-base) var(--ease-out);
+      }
+      .q[open] summary svg {
+        transform: rotate(180deg);
+      }
+      .q p {
+        margin: 12px 0 0;
+        font-size: 14px;
+        color: var(--fg-body);
+        line-height: 1.6;
+        max-width: 640px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="ra-eyebrow">FAQ · DETAILS/SUMMARY</div>
+      <div class="faq">
+        <details open class="q">
+          <summary>
+            What's included in the package?<svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </summary>
+          <p>
+            Design tokens (color, type, spacing, motion), recipe classes, font imports, and brand
+            assets — wordmark, mark, favicons, OG image. Plain CSS custom properties. No JS runtime,
+            no build step.
+          </p>
+        </details>
+        <details class="q">
+          <summary>
+            Does it work with Tailwind?<svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </summary>
+        </details>
+        <details class="q">
+          <summary>
+            How is dark mode handled?<svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </summary>
+        </details>
+      </div>
+    </div>
+  </body>
+</html>

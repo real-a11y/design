@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="_preview-base.css" />
+    <style>
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 14px 20px;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border-default);
+        border-radius: 8px;
+        border: 1px solid var(--border-default);
+      }
+      .brand {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: 20px;
+        color: var(--fg-heading);
+        white-space: nowrap;
+      }
+      .links {
+        display: flex;
+        gap: 24px;
+        flex: 1;
+        justify-content: center;
+      }
+      .links a {
+        font-family: var(--font-body);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--fg-body);
+        cursor: pointer;
+      }
+      .links a.active {
+        color: var(--primary-600);
+      }
+      .util {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ic {
+        width: 36px;
+        height: 36px;
+        border: 0;
+        background: none;
+        color: var(--fg-muted);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .pill {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--fg-muted);
+        border: 1px solid var(--border-default);
+        padding: 6px 10px;
+        border-radius: 6px;
+      }
+      .talk {
+        border: 0;
+        background: var(--primary-600);
+        color: #fff;
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 14px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="ra-eyebrow">STICKY NAV</div>
+      <header class="nav">
+        <span class="brand">real a11y</span>
+        <nav class="links">
+          <a>Overview</a><a class="active">Components</a><a>Tokens</a><a>Brand</a><a>Docs</a>
+        </nav>
+        <div class="util">
+          <button class="ic" title="Dark">☾</button>
+          <span class="pill">ES</span>
+          <button class="talk">Get started</button>
+        </div>
+      </header>
+    </div>
+  </body>
+</html>
