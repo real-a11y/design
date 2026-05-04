@@ -2,7 +2,7 @@
 
 > **Real accessibility, systematised.** The design language behind **real a11y**.
 
-A CSS-first design system shipping tokens, type, color, components, and brand assets as a single npm package. Editorial serif voice, practical sans body, one accent color, accessibility-first defaults.
+A CSS-first design system shipping tokens, recipe classes, and fonts as a single npm package. Editorial serif voice, practical sans body, one accent color, accessibility-first defaults.
 
 ```bash
 npm install @real-a11y-dev/design
@@ -42,9 +42,11 @@ Tokens are plain CSS custom properties — works with any framework (Tailwind, v
 | `--color-text-primary`   | hsl(222 47% 11%) | hsl(210 40% 95%) |
 | `--color-text-secondary` | hsl(215 20% 40%) | hsl(215 20% 65%) |
 | `--color-text-muted`     | hsl(215 16% 45%) | hsl(215 16% 65%) |
+| `--color-accent`         | hsl(224 76% 45%) | hsl(221 90% 78%) |
+| `--color-accent-hover`   | hsl(224 76% 36%) | hsl(221 96% 87%) |
 | `--primary-600`          | **#2463eb**      | same             |
 
-Single accent ramp `primary-50 → 900`. `primary-600` for buttons, links, focus, check markers. `primary-300` for card hover borders. `primary-700` for hover states.
+Single accent ramp `primary-50 → 900`. Use `--color-accent` (theme-aware: primary-700 in light / primary-300 in dark — passes WCAG AA on both backgrounds) for links and emphasized text. Use `--primary-600` for solid surfaces (CTA backgrounds, focus rings, check markers) — never as text on a dark background, it fails AA at 3.65:1. `primary-300` is also used for card-hover borders.
 
 **Dark mode:** add `.dark` (or `[data-theme="dark"]`) on `<html>` — tokens flip automatically.
 
@@ -70,9 +72,9 @@ Single accent ramp `primary-50 → 900`. `primary-600` for buttons, links, focus
 | Component      | Rest                        | Hover                              | Focus                         |
 | -------------- | --------------------------- | ---------------------------------- | ----------------------------- |
 | Primary button | `bg-primary-600 text-white` | `bg-primary-700`                   | 2px primary-600 ring (global) |
-| Text link      | `text-primary-600`          | `text-primary-700`                 | (global)                      |
+| Text link      | `text-accent`               | `hover:text-accent-hover`          | (global)                      |
 | Card           | `border-border`             | `border-primary-300` + `shadow-sm` | (global)                      |
-| Nav link       | `text-text-secondary`       | `text-primary-600`                 | (global)                      |
+| Nav link       | `text-text-secondary`       | `hover:text-accent`                | (global)                      |
 | Icon button    | `text-text-muted`           | `bg-bg-subtle text-text-primary`   | (global)                      |
 
 44px minimum tap target on every interactive utility.
@@ -97,6 +99,8 @@ export default {
         "text-primary": "hsl(var(--color-text-primary) / <alpha-value>)",
         "text-secondary": "hsl(var(--color-text-secondary) / <alpha-value>)",
         "text-muted": "hsl(var(--color-text-muted) / <alpha-value>)",
+        accent: "hsl(var(--color-accent) / <alpha-value>)",
+        "accent-hover": "hsl(var(--color-accent-hover) / <alpha-value>)",
         primary: {
           50: "hsl(221 100% 97%)",
           100: "hsl(221 100% 94%)",
@@ -118,12 +122,6 @@ export default {
   },
 } satisfies Config;
 ```
-
----
-
-## Brand artifacts
-
-Logos, favicons, social cards, and the icon set live in the [GitHub repo](https://github.com/real-a11y-dev/design) under `assets/` — they're not bundled into the npm package. For icons, install [`lucide-react`](https://www.npmjs.com/package/lucide-react) or [`lucide-static`](https://www.npmjs.com/package/lucide-static) directly.
 
 ---
 
