@@ -12,6 +12,8 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      # Required for npm Trusted Publisher OIDC — the runner exchanges its
+      # short-lived OIDC token with npm at publish time. No NPM_TOKEN secret.
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -20,17 +22,20 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Node 24 ships with npm 11, which is required for Trusted Publisher
+          # OIDC publishing (npm >= 11.5.1).
+          node-version: 24
           cache: npm
           registry-url: "https://registry.npmjs.org"
 
       - run: npm ci
 
       # Either opens a "Version Packages" PR consolidating pending changesets,
-      # or — when no pending changesets remain — publishes to npm.
+      # or — when no pending changesets remain — publishes to npm. Publish auth
+      # comes from the npm Trusted Publisher OIDC exchange (configured on
+      # npmjs.com for this repo + workflow filename); no NPM_TOKEN required.
       - uses: changesets/action@v1
         with:
           publish: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
