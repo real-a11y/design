@@ -1,0 +1,56 @@
+/* ============================================================
+   real a11y — element defaults
+   Opt-in stylesheet that applies the design system's voice to
+   bare HTML: page font, heading family, focus ring, and
+   prefers-reduced-motion guard. Import after `tokens.css`.
+
+   Kept separate from tokens.css so consumers who only want the
+   custom properties (or who manage their own typography) don't
+   have body/heading rules silently injected on import.
+   ============================================================ */
+
+html {
+  font-family: var(--font-sans);
+  color: hsl(var(--color-text-primary));
+  background: hsl(var(--color-bg));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.625;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  /* Color intentionally inherits from the surrounding context (defaults to
+     --color-text-primary via html). This lets a parent surface — e.g. a
+     filled brand callout setting `color: hsl(var(--color-on-accent))` —
+     recolor its headings without each consumer having to add an override. */
+}
+
+/* ---------- Focus ring (accessibility-first; consumes --ring-* tokens) ---------- */
+:focus-visible {
+  outline: var(--ring-width) solid hsl(var(--ring-color));
+  outline-offset: var(--ring-offset);
+  border-radius: 2px;
+}
+
+/* ---------- Motion respect ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
