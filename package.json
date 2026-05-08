@@ -14,13 +14,13 @@
   ],
   "license": "MIT",
   "author": "real a11y",
-  "homepage": "https://github.com/real-a11y-dev/design#readme",
+  "homepage": "https://github.com/real-a11y/design#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/real-a11y-dev/design.git"
+    "url": "git+https://github.com/real-a11y/design.git"
   },
   "bugs": {
-    "url": "https://github.com/real-a11y-dev/design/issues"
+    "url": "https://github.com/real-a11y/design/issues"
   },
   "type": "module",
   "scripts": {
