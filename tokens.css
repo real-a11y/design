@@ -3,6 +3,12 @@
    Mirrors src/app/globals.css + tailwind config from the repo.
    All colors declared as HSL component triplets (no hsl() wrap)
    so they can be composed with alpha in Tailwind: hsl(var(--x) / .5)
+
+   This file is *tokens only* — custom property declarations and the
+   .dark / prefers-color-scheme flips. Element defaults (body,
+   headings, :focus-visible, prefers-reduced-motion) live in
+   `base.css` so importing tokens never silently restyles consumer
+   markup.
    ============================================================ */
 
 :root {
@@ -43,10 +49,26 @@
   --color-accent: 224 76% 45%;
   --color-accent-hover: 224 76% 36%;
 
-  /* ---------- Semantic surface + text (light) ---------- */
-  /* NB: Repo declares these on :root in app/globals.css. Names use
+  /* Soft brand surface — flips on .dark, unlike --primary-100.
+     Use for callout backgrounds, badges, and "branded but quiet" tints. */
+  --color-accent-soft: 224 76% 95%;
+
+  /* Inverse-contrast pair for "on accent" surfaces (button text, badge text).
+     Pairs with --color-accent at AA. Distinct from --color-text-inverse,
+     which is the inverse of --color-text-primary. */
+  --color-on-accent: 0 0% 100%;
+
+  /* ---------- Semantic surface + text (light) ----------
+     NB: Repo declares these on :root in app/globals.css. Names use
      the --color-* prefix so Tailwind's `bg-bg` / `text-text-primary` utilities
-     resolve. Do not rename without updating tailwind.config.ts. */
+     resolve. Do not rename without updating tailwind.config.ts.
+
+     --color-bg vs --color-bg-subtle vs --color-surface:
+       bg        — page background.
+       bg-subtle — alternating section band; one step off page bg.
+       surface   — card/elevated content; intentionally close to bg in light
+                   (the brand is editorial-flat, no lift), and one step above
+                   bg-subtle in dark to keep cards visually distinct. */
   --color-bg: 0 0% 100%; /* page background */
   --color-bg-subtle: 210 20% 98%; /* alternating section band */
   --color-surface: 0 0% 100%; /* cards */
@@ -57,10 +79,26 @@
   --color-text-muted: 215 16% 45%; /* meta, eyebrows, captions */
   --color-text-inverse: 0 0% 100%;
 
+  /* ---------- Code & diff surfaces ----------
+     Tuned for Shiki-flavored docs integrations. Each comment-on-diff-bg
+     pair is verified AA in fixtures/contrast.html. */
+  --color-code-bg: 210 20% 98%; /* aligns with --color-bg-subtle */
+  --color-code-fg: 222 47% 11%; /* aligns with --color-text-primary */
+  --color-code-comment: 215 20% 35%; /* AA on code-bg AND diff bgs */
+  --color-diff-add-bg: 142 60% 92%; /* light green */
+  --color-diff-remove-bg: 0 70% 95%; /* light red/pink */
+
   /* ---------- Status (sparingly; the brand leans on primary only) ---------- */
   --color-danger: 0 72% 51%; /* used in −A11y motif */
   --color-success: 142 71% 45%;
   --color-warning: 38 92% 50%;
+
+  /* ---------- Focus ring ----------
+     `base.css` exposes these via :focus-visible. Override on any element to
+     restyle focus locally without losing the AA-tested colour. */
+  --ring-color: var(--color-accent);
+  --ring-width: 2px;
+  --ring-offset: 2px;
 
   /* ---------- Radii (Tailwind scale) ---------- */
   --radius-sm: 4px;
@@ -74,6 +112,23 @@
   --shadow-xs: 0 1px 2px rgb(15 23 41 / 0.04);
   --shadow-sm: 0 1px 3px rgb(15 23 41 / 0.05), 0 1px 2px rgb(15 23 41 / 0.04);
   --shadow-md: 0 4px 6px -1px rgb(15 23 41 / 0.07), 0 2px 4px -2px rgb(15 23 41 / 0.05);
+
+  /* ---------- Spacing (4px base) ----------
+     Layout-y aliases (--container, --nav-height, --section-y) live below;
+     these are the general-purpose scale consumers reach for. */
+  --space-0: 0;
+  --space-1: 0.25rem; /* 4  */
+  --space-2: 0.5rem; /* 8  */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem; /* 16 */
+  --space-5: 1.25rem; /* 20 */
+  --space-6: 1.5rem; /* 24 */
+  --space-8: 2rem; /* 32 */
+  --space-10: 2.5rem; /* 40 */
+  --space-12: 3rem; /* 48 */
+  --space-16: 4rem; /* 64 */
+  --space-20: 5rem; /* 80 */
+  --space-24: 6rem; /* 96 */
 
   /* ---------- Layout ---------- */
   --container: 64rem; /* max-w-5xl */
@@ -104,6 +159,17 @@
      Accent flips to a lighter tint so links pass AA on the dark surface. */
   --color-accent: 221 90% 78%;
   --color-accent-hover: 221 96% 87%;
+
+  /* Flips so soft surfaces and on-accent text keep AA in dark. */
+  --color-accent-soft: 224 64% 18%;
+  --color-on-accent: 222 47% 11%;
+
+  /* Code & diff surfaces flip to dark backgrounds; comment lifts to stay AA. */
+  --color-code-bg: 222 47% 11%;
+  --color-code-fg: 210 40% 95%;
+  --color-code-comment: 215 16% 65%;
+  --color-diff-add-bg: 142 30% 18%;
+  --color-diff-remove-bg: 0 50% 22%;
 }
 
 /* Also honors OS preference when no explicit .light class is set —
@@ -120,51 +186,12 @@
     --color-text-inverse: 222 47% 11%;
     --color-accent: 221 90% 78%;
     --color-accent-hover: 221 96% 87%;
-  }
-}
-
-/* ============================================================
-   Global base (lifted from src/app/globals.css intent)
-   ============================================================ */
-html {
-  font-family: var(--font-sans);
-  color: hsl(var(--color-text-primary));
-  background: hsl(var(--color-bg));
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.625;
-}
-
-h1,
-h2,
-h3,
-.font-display {
-  font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: hsl(var(--color-text-primary));
-}
-
-/* ---------- Focus ring (accessibility-first; honors primary-600) ---------- */
-:focus-visible {
-  outline: 2px solid hsl(var(--primary-600));
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-/* ---------- Motion respect ---------- */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    --color-accent-soft: 224 64% 18%;
+    --color-on-accent: 222 47% 11%;
+    --color-code-bg: 222 47% 11%;
+    --color-code-fg: 210 40% 95%;
+    --color-code-comment: 215 16% 65%;
+    --color-diff-add-bg: 142 30% 18%;
+    --color-diff-remove-bg: 0 50% 22%;
   }
 }

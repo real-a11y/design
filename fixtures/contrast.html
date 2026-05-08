@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Contrast fixture — real a11y design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <style>
+      /* Layout-only — colour comes entirely from the design tokens. */
+      body {
+        padding: 24px;
+        background: hsl(var(--color-bg));
+      }
+      h1 {
+        font-size: 1.25rem;
+        margin: 0 0 16px;
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+      .panel {
+        padding: 16px 20px;
+        border-radius: var(--radius-md);
+        border: 1px solid hsl(var(--color-border));
+      }
+      .panel h2 {
+        font-size: 0.875rem;
+        margin: 0 0 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .panel p {
+        margin: 0 0 4px;
+      }
+      .panel p:last-child {
+        margin-bottom: 0;
+      }
+      .text-primary {
+        color: hsl(var(--color-text-primary));
+      }
+      .text-secondary {
+        color: hsl(var(--color-text-secondary));
+      }
+      .text-muted {
+        color: hsl(var(--color-text-muted));
+      }
+      .text-accent {
+        color: hsl(var(--color-accent));
+      }
+      .surface-bg {
+        background: hsl(var(--color-bg));
+      }
+      .surface-bg-subtle {
+        background: hsl(var(--color-bg-subtle));
+      }
+      .surface-surface {
+        background: hsl(var(--color-surface));
+      }
+      .surface-accent {
+        background: hsl(var(--color-accent));
+        color: hsl(var(--color-on-accent));
+        border-color: hsl(var(--color-accent));
+      }
+      .surface-accent-soft {
+        background: hsl(var(--color-accent-soft));
+      }
+      .surface-code {
+        background: hsl(var(--color-code-bg));
+        font-family: var(--font-mono);
+      }
+      .surface-code .code-fg {
+        color: hsl(var(--color-code-fg));
+      }
+      .surface-code .code-comment {
+        color: hsl(var(--color-code-comment));
+      }
+      .diff-line {
+        padding: 4px 8px;
+        font-family: var(--font-mono);
+      }
+      .diff-add {
+        background: hsl(var(--color-diff-add-bg));
+      }
+      .diff-remove {
+        background: hsl(var(--color-diff-remove-bg));
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="text-primary">Contrast fixture — every intended-AA pair</h1>
+
+    <div class="grid">
+      <section class="panel surface-bg" data-pair="text-on-bg">
+        <h2 class="text-primary">--color-bg</h2>
+        <p class="text-primary">Text-primary — heading copy on the page background.</p>
+        <p class="text-secondary">Text-secondary — body paragraph copy.</p>
+        <p class="text-muted">Text-muted — meta and caption copy.</p>
+        <p><a class="text-accent" href="#">Accent link inside default surface</a></p>
+      </section>
+
+      <section class="panel surface-bg-subtle" data-pair="text-on-bg-subtle">
+        <h2 class="text-primary">--color-bg-subtle</h2>
+        <p class="text-primary">Text-primary on a subtle section band.</p>
+        <p class="text-secondary">Text-secondary on a subtle section band.</p>
+        <p class="text-muted">Text-muted on a subtle section band.</p>
+      </section>
+
+      <section class="panel surface-surface" data-pair="text-on-surface">
+        <h2 class="text-primary">--color-surface</h2>
+        <p class="text-primary">Text-primary on a card surface.</p>
+        <p class="text-secondary">Text-secondary on a card surface.</p>
+        <p class="text-muted">Text-muted on a card surface.</p>
+      </section>
+
+      <section class="panel surface-accent" data-pair="on-accent">
+        <h2>--color-accent</h2>
+        <p>On-accent text — button label or filled badge copy.</p>
+      </section>
+
+      <section class="panel surface-accent-soft" data-pair="text-on-accent-soft">
+        <h2 class="text-primary">--color-accent-soft</h2>
+        <p class="text-primary">Text-primary on a soft brand surface (callout, badge bg).</p>
+        <p><a class="text-accent" href="#">Accent link inside soft brand surface</a></p>
+      </section>
+
+      <section class="panel surface-code" data-pair="code-on-code-bg">
+        <h2 class="code-fg">--color-code-bg</h2>
+        <p class="code-fg">const greet = "code-fg on code-bg";</p>
+        <p class="code-comment">// code-comment on code-bg</p>
+        <div class="diff-line diff-add">
+          <span class="code-fg">+ added line on diff-add-bg</span>
+        </div>
+        <div class="diff-line diff-add">
+          <span class="code-comment">+ // comment on diff-add-bg</span>
+        </div>
+        <div class="diff-line diff-remove">
+          <span class="code-fg">- removed line on diff-remove-bg</span>
+        </div>
+        <div class="diff-line diff-remove">
+          <span class="code-comment">- // comment on diff-remove-bg</span>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
